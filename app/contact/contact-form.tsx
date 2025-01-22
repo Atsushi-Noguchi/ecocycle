@@ -1,6 +1,6 @@
 "use client"
 
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import { useActionState } from "react"
 import { useForm } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
@@ -16,18 +16,31 @@ import { useToast } from "@/components/ui/use-toast"
 import { submitContact } from "./actions"
 
 const formSchema = z.object({
-  type: z.enum(["個人", "法人"]),
-  name: z.string().min(1, { message: "名前を入力してください" }),
-  email: z.string().email({ message: "有効なメールアドレスを入力してください" }),
-  phone: z.string().min(1, { message: "電話番号を入力してください" }),
-  message: z.string().min(1, { message: "お問い合わせ内容を入力してください" }),
+  type: z.enum(["個人", "法人"], {
+    required_error: "お客様区分を選択してください",
+  }),
+  name: z.string()
+    .min(1, { message: "名前を入力してください" })
+    .max(50, { message: "名前は50文字以内で入力してください" }),
+  email: z.string()
+    .email({ message: "有効なメールアドレスを入力してください" })
+    .max(100, { message: "メールアドレスは100文字以内で入力してください" }),
+  phone: z.string()
+    .min(1, { message: "電話番号を入力してください" })
+    .regex(/^[0-9-]+$/, { message: "電話番号は数字とハイフンのみで入力してください" })
+    .max(15, { message: "電話番号は15文字以内で入力してください" }),
+  message: z.string()
+    .min(1, { message: "お問い合わせ内容を入力してください" })
+    .max(1000, { message: "お問い合わせ内容は1000文字以内で入力してください" }),
 })
 
 export function ContactForm() {
   const [isPending, setIsPending] = useState(false)
   const { toast } = useToast()
-  const [state, formAction] = useActionState(submitContact, null)
-
+  const [state, formAction] = useActionState<
+    { success: boolean; message?: string; errors?: Record<string, string[]> } | null,
+    FormData
+  >(submitContact, null)
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -39,27 +52,31 @@ export function ContactForm() {
     },
   })
 
+  useEffect(() => {
+    if (!state) return
+    
+    if (state.success) {
+      toast({
+        title: "送信完了",
+        description: state.message,
+      })
+      form.reset()
+    } else if (state.errors) {
+      toast({
+        title: "エラー",
+        description: "入力内容をご確認ください。",
+        variant: "destructive",
+      })
+    }
+  }, [state, form, toast])
+
   return (
     <Form {...form}>
       <form
         action={async (formData) => {
           setIsPending(true)
-          const result = await formAction(formData)
+          await formAction(formData)
           setIsPending(false)
-
-          if (result?.success) {
-            toast({
-              title: "送信完了",
-              description: result.message,
-            })
-            form.reset()
-          } else if (result?.errors) {
-            toast({
-              title: "エラー",
-              description: "入力内容をご確認ください。",
-              variant: "destructive",
-            })
-          }
         }}
         className="space-y-6"
       >
@@ -166,4 +183,3 @@ export function ContactForm() {
     </Form>
   )
 }
-
