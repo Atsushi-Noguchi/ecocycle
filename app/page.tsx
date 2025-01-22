@@ -17,11 +17,14 @@ export default function Page() {
       <section className="relative h-[600px] flex items-center">
         <div className="absolute inset-0 -z-10">
           <Image
-            src="/header.jpg"
+            src="/header.webp"
             alt="リサイクルセンターの外観"
-            fill
+            width={1920}
+            height={1080}
             className="object-cover brightness-50"
             priority
+            sizes="100vw"
+            quality={85}
           />
         </div>
         <div className="container">
@@ -77,7 +80,15 @@ export default function Page() {
             ].map((feature) => (
               <Card key={feature.title} className="overflow-hidden">
                 <div className="relative h-48">
-                  <Image src={feature.image} alt={feature.alt} fill className="object-cover" />
+                  <Image
+                    src={feature.image.replace('.jpg', '.webp')}
+                    alt={feature.alt}
+                    width={400}
+                    height={300}
+                    className="object-cover"
+                    quality={75}
+                    loading="lazy"
+                  />
                 </div>
                 <CardHeader>
                   <feature.icon className="h-10 w-10 text-primary" />
@@ -140,7 +151,16 @@ export default function Page() {
             ].map((category) => (
               <Card key={category.title} className="overflow-hidden">
                 <div className="relative h-48">
-                  <Image src={category.image} alt={category.alt} fill className="object-cover" />
+                  <Image
+                    src={category.image.replace('.jpg', '.webp')}
+                    alt={category.alt}
+                    width={600}
+                    height={400}
+                    className="object-cover"
+                    quality={80}
+                    loading="lazy"
+                    sizes="(max-width: 768px) 100vw, 50vw"
+                  />
                 </div>
                 <CardHeader>
                   <CardTitle>{category.title}</CardTitle>

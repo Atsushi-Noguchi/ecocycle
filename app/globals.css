@@ -3,7 +3,8 @@
 @tailwind utilities;
 
 body {
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-sans), Arial, sans-serif;
+  font-display: swap;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -18,6 +19,7 @@ main {
   padding: 0 1rem;
 }
 
+/* PurgeCSS start ignore */
 @layer utilities {
   .text-balance {
     text-wrap: balance;

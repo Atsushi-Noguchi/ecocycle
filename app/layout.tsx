@@ -8,6 +8,8 @@ import { Toaster } from "@/components/ui/toaster"
 const geist = Geist({
   subsets: ["latin"],
   variable: "--font-sans",
+  display: 'swap',
+  preload: true,
 })
 
 export const metadata: Metadata = {
@@ -37,7 +39,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "エコリサイクル株式会社 | 不用品買取・リサイクル専門",
     description: "環境に優しいリサイクルサービスで持続可能な社会を実現",
-    images: ["/twitter-image.jpg"]
+    images: ["/twitter-image.webp"]
   },
   alternates: {
     canonical: process.env.NEXT_PUBLIC_SITE_URL
