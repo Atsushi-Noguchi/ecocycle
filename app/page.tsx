@@ -1,9 +1,15 @@
 import Image from "next/image"
 import Link from "next/link"
 import { ArrowRight, CheckCircle2, Recycle, Timer, Truck } from "lucide-react"
+import Script from "next/script"
 
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
+
+export const metadata = {
+  title: "不用品買取・リサイクルサービス | エコリサイクル株式会社",
+  description: "家電・家具の無料引き取りから適正処理まで。東京・神奈川エリアでSDGsに貢献するリサイクル専門企業。即日対応可能。",
+}
 
 export default function Page() {
   return (
