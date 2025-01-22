@@ -151,7 +151,7 @@ export default function Page() {
           </div>
           <div className="mt-12 text-center">
             <Button size="lg" asChild>
-              <Link href="/services">すべての買取品目を見る</Link>
+              <Link href="/services">主要サービスを見る</Link>
             </Button>
           </div>
         </div>
