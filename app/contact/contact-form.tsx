@@ -74,8 +74,10 @@ export function ContactForm() {
     <Form {...form}>
       <form
         action={async (formData) => {
+          console.log("Form data:", Object.fromEntries(formData.entries()))
           setIsPending(true)
-          await formAction(formData)
+          const result = await formAction(formData)
+          console.log("Action result:", result)
           setIsPending(false)
         }}
         className="space-y-6"
@@ -87,7 +89,13 @@ export function ContactForm() {
             <FormItem className="space-y-3">
               <FormLabel>お客様区分</FormLabel>
               <FormControl>
-                <RadioGroup onValueChange={field.onChange} defaultValue={field.value} className="flex flex-wrap gap-4">
+                <RadioGroup 
+                  onValueChange={field.onChange} 
+                  defaultValue={field.value}
+                  value={field.value}
+                  name="type"
+                  className="flex flex-wrap gap-4"
+                >
                   <FormItem className="flex items-center space-x-2 space-y-0">
                     <FormControl>
                       <RadioGroupItem value="個人" />

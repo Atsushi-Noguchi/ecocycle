@@ -44,7 +44,7 @@ export default function Page() {
                 icon: Timer,
                 title: "迅速な対応",
                 description: "お問い合わせから24時間以内に担当者が丁寧にご対応いたします。",
-                image: "/customer-service.jpg",
+                image: "/31603254_s.jpg",
                 alt: "カスタマーサービススタッフ",
               },
               {

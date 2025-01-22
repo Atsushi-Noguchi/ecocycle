@@ -36,9 +36,11 @@ export async function submitContact(
   })
 
   if (!validatedFields.success) {
+    console.log("Validation errors:", validatedFields.error.flatten().fieldErrors)
     return {
       success: false,
       errors: validatedFields.error.flatten().fieldErrors,
+      message: "入力内容にエラーがあります",
     }
   }
 
