@@ -14,13 +14,12 @@ export const metadata = {
 export default function Page() {
   return (
     <>
-      <section className="relative min-h-[80vh] flex items-center overflow-hidden">
+      <section className="relative min-h-[60vh] sm:min-h-[80vh] flex items-center overflow-hidden">
         <div className="absolute inset-0 -z-10 w-full h-full">
           <Image
             src="/header.webp"
             alt="リサイクルセンターの外観"
-            width={1920}
-            height={1080}
+            fill
             className="object-cover brightness-50"
             priority
             sizes="100vw"
@@ -28,7 +27,7 @@ export default function Page() {
           />
         </div>
         <div className="container px-4">
-          <div className="mx-auto max-w-2xl space-y-6 text-center relative z-10">
+          <div className="mx-auto max-w-2xl space-y-4 sm:space-y-6 text-center relative z-10">
             <h1 className="text-5xl font-bold font-serif sm:text-6xl md:text-7xl text-white">
               エコリサイクルで<br />
               新しい価値を
