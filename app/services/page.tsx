@@ -16,13 +16,14 @@ export default function ServicesPage() {
   return (
     <>
       <section className="relative">
-        <div className="absolute inset-0 -z-10">
+        <div className="absolute inset-0 -z-10 w-full h-full">
           <Image
-            src="/header.jpg"
+            src="/header.webp"
             alt="事業内容のヘッダー画像"
             fill
             className="object-cover brightness-50"
             priority
+            sizes="100vw"
           />
         </div>
         <div className="container relative py-24 md:py-28 lg:py-32">

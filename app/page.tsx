@@ -14,8 +14,8 @@ export const metadata = {
 export default function Page() {
   return (
     <>
-      <section className="relative h-[600px] flex items-center">
-        <div className="absolute inset-0 -z-10">
+      <section className="relative min-h-[80vh] flex items-center overflow-hidden">
+        <div className="absolute inset-0 -z-10 w-full h-full">
           <Image
             src="/header.webp"
             alt="リサイクルセンターの外観"
@@ -27,8 +27,8 @@ export default function Page() {
             quality={85}
           />
         </div>
-        <div className="container">
-          <div className="mx-auto max-w-2xl space-y-6 text-center">
+        <div className="container px-4">
+          <div className="mx-auto max-w-2xl space-y-6 text-center relative z-10">
             <h1 className="text-5xl font-bold font-serif sm:text-6xl md:text-7xl text-white">
               エコリサイクルで<br />
               新しい価値を
@@ -47,54 +47,57 @@ export default function Page() {
             <h2 className="text-2xl font-bold sm:text-3xl md:text-4xl">選ばれる理由</h2>
             <p className="mt-4 text-muted-foreground">エコリサイクルが多くのお客様に選ばれている理由をご紹介します。</p>
           </div>
-          <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+          <div className="mt-12 grid gap-8 sm:grid-cols-2 lg:grid-cols-4 px-4">
             {[
               {
                 icon: Timer,
                 title: "迅速な対応",
                 description: "お問い合わせから24時間以内に担当者が丁寧にご対応いたします。",
-                image: "/31603254_s.jpg",
+                image: "/31603254_s.webp",
                 alt: "カスタマーサービススタッフ",
               },
               {
                 icon: CheckCircle2,
                 title: "確かな査定",
                 description: "経験豊富なスタッフが、適切な価格で査定いたします。",
-                image: "/31183591_m.jpg",
+                image: "/31183591_m.webp",
                 alt: "査定作業の様子",
               },
               {
                 icon: Truck,
                 title: "無料回収",
                 description: "買取が成立した場合、回収・運搬費用は一切かかりません。",
-                image: "/25058951_s.jpg",
+                image: "/25058951_s.webp",
                 alt: "回収トラック",
               },
               {
                 icon: Recycle,
                 title: "環境配慮",
                 description: "買い取った商品は可能な限りリサイクル・リユースいたします。",
-                image: "/31364879_s.jpg",
+                image: "/31364879_s.webp",
                 alt: "リサイクル作業の様子",
               },
             ].map((feature) => (
-              <Card key={feature.title} className="overflow-hidden">
-                <div className="relative h-48">
+              <Card key={feature.title} className="overflow-hidden flex flex-col">
+                <div className="relative aspect-video bg-gray-100">
                   <Image
                     src={feature.image.replace('.jpg', '.webp')}
                     alt={feature.alt}
-                    width={400}
-                    height={300}
+                    fill
                     className="object-cover"
                     quality={75}
                     loading="lazy"
                   />
                 </div>
-                <CardHeader>
-                  <feature.icon className="h-10 w-10 text-primary" />
-                  <CardTitle className="mt-4">{feature.title}</CardTitle>
-                  <CardDescription>{feature.description}</CardDescription>
-                </CardHeader>
+                <div className="flex-1 p-6 flex flex-col">
+                  <div className="flex items-center space-x-4 mb-4">
+                    <feature.icon className="h-8 w-8 text-primary" />
+                    <CardTitle className="text-lg">{feature.title}</CardTitle>
+                  </div>
+                  <CardDescription className="text-base leading-relaxed flex-1">
+                    {feature.description}
+                  </CardDescription>
+                </div>
               </Card>
             ))}
           </div>
@@ -102,8 +105,8 @@ export default function Page() {
       </section>
 
       {/* 買取品目セクション */}
-      <section className="border-t bg-muted/40 py-16 md:py-20 lg:py-24">
-        <div className="container">
+      <section className="border-t bg-gray-50 py-16 md:py-20 lg:py-24">
+        <div className="container px-4">
           <div className="mx-auto max-w-[800px] text-center">
             <h2 className="text-2xl font-bold sm:text-3xl md:text-4xl">買取品目</h2>
             <p className="mt-4 text-muted-foreground">
@@ -150,20 +153,19 @@ export default function Page() {
               },
             ].map((category) => (
               <Card key={category.title} className="overflow-hidden">
-                <div className="relative h-48">
+                <div className="relative aspect-video bg-gray-100">
                   <Image
                     src={category.image.replace('.jpg', '.webp')}
                     alt={category.alt}
-                    width={600}
-                    height={400}
+                    fill
                     className="object-cover"
                     quality={80}
                     loading="lazy"
                     sizes="(max-width: 768px) 100vw, 50vw"
                   />
                 </div>
-                <CardHeader>
-                  <CardTitle>{category.title}</CardTitle>
+                <CardHeader className="p-6">
+                  <CardTitle className="text-lg">{category.title}</CardTitle>
                 </CardHeader>
                 <CardContent>
                   <ul className="list-inside list-disc space-y-2 text-sm text-muted-foreground">

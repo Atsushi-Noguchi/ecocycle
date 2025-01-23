@@ -13,6 +13,7 @@ const geist = Geist({
 })
 
 export const metadata: Metadata = {
+  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000'),
   title: {
     default: "エコリサイクル株式会社 | 不用品買取・リサイクル専門",
     template: "%s | エコリサイクル株式会社"
